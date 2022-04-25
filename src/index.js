@@ -43,7 +43,7 @@ import './index.css';
       const winner = calculateWinner(this.state.squares);
       let status;
       if (winner){
-        status = 'WINNER:' + winner;
+        status = '!!  WINNER  !! -> ' + winner;
       }
       else {
         status = 'Next Player:'+ (this.state.xIsNext ? 'X':'O');
@@ -97,8 +97,9 @@ import './index.css';
       [6,7,8],
       [0,3,6],  //top to bottom all 3 columns 
       [1,4,7],
-      [2,5,8],
-      [0,4,8], //diagonals 
+      [2,5,8]
+      [2,4,6], //diagonals
+      [0,4,8],
     ];
 
     for(let i=0;i<lines.length;i++){
