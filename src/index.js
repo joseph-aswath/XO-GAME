@@ -21,6 +21,9 @@ import './index.css';
 
     handleClick(i){
       const squares= this.state.squares.slice();
+      if(calculateWinner(squares) || squares[i]) {
+        return;
+      }
       squares[i]= this.state.xIsNext?"X":"O"; //magic 
       this.setState({
         squares:squares,
@@ -36,8 +39,16 @@ import './index.css';
     }
   
     render() {
-      const status = 'Next player:'+ (this.state.xIsNext ? 'X':'O');
-  
+      //const status = 'Next player:'+ (this.state.xIsNext ? 'X':'O');
+      const winner = calculateWinner(this.state.squares);
+      let status;
+      if (winner){
+        status = 'WINNER:' + winner;
+      }
+      else {
+        status = 'Next Player:'+ (this.state.xIsNext ? 'X':'O');
+      }
+
       return (
         <div class="theBoard">
           <div className="status">{status}</div>
@@ -77,7 +88,9 @@ import './index.css';
     }
   }
 
-  function calculateWinner(squares){
+  function calculateWinner(squares){  //given an array of 9 squares 
+                                      //this function will check for winners 
+                                      //and return X,O,NULL as appropriate
     const lines = [
       [0,1,2], //left 2 right all 3 rows 
       [3,4,5],
